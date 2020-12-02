@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- xml mapper와 짝이 되서 돌아갈 자바명, 패키지명을 적어주면 된다. -->
+
+<mapper namespace="com.mybatis.mapper.FSelectBoxMapper">
+
+	<resultMap type="HouseInfo" id="HouseInfoResult">
+		<id property="no" column="no" />
+		<result property="dong" column="dong" />
+		<result property="AptName" column="AptName" />
+		<result property="code" column="code" />
+		<result property="buildYear" column="buildYear" />
+		<result property="jibun" column="jibun" />
+		<result property="lat" column="lat" />
+		<result property="lng" column="lng" />
+		<result property="img" column="img" />
+	</resultMap>
+	
+	<resultMap type="SidoCode" id="SidoCodeResult">
+		<result property="sido_code" column="sido_code" />
+		<result property="sido_name" column="sido_name" />
+		<result property="gugun_code" column="gugun_code" />
+		<result property="gugun_name" column="gugun_name" />
+	</resultMap>
+
+	<select id="selectSido" resultType="SidoCode">
+      SELECT left(sido_code,2) sido_code, sido_name FROM sidocode ORDER BY sido_code
+   </select>
+   
+   <select id="selectGugun" resultType="SidoCode" parameterType="String">
+      SELECT left(gugun_code,5) gugun_code, gugun_name FROM guguncode where left(gugun_code,2) = #{sido} ORDER BY gugun_code
+   </select>
+   
+   <select id="selectDong" resultType="HouseInfo" parameterType="String">
+      SELECT distinct dong, code FROM houseinfo where code = #{gugun} ORDER BY dong
+   </select>
+   
+   <select id="selectApt" resultType="HouseInfo" parameterType="String">
+      SELECT no,dong,AptName,code,jibun FROM houseinfo WHERE dong = #{dong} ORDER BY AptName
+   </select>
+
+</mapper>

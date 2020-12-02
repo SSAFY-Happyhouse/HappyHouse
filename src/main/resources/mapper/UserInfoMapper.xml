@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.mybatis.mapper.UserInfoMapper">
+
+<!--7. myBatis가 이용하는 query문장이 들어 있는 파일
+java Mapper에 의해 이용됨.
+java Mapper - xml Mapper  - myBatis   
+java Mapper안에 있는 메소드 이름과 xml Mapper 안의 query id가 일치해야 함.
+-->
+ 
+<!-- 리절트 맵 정의. primary key 컬럼은 id 태그로 표시해줌 -->
+   <resultMap id="UserInfoResult"  type="UserInfo">
+   		<id column="userid" property="userid"/>
+   		<result column="username" property="username"/>
+   		<result column="userpwd" property="userpwd"/>
+   		<result column="email" property="email"/>
+   		<result column="tel" property="tel"/>
+   		<result column="address" property="address"/>
+   </resultMap>
+ 
+  <insert id="create" parameterType="UserInfo">
+    insert into userinfo values (#{userid}, #{username}, #{userpwd}, #{email}, #{tel}, #{address})
+  </insert>
+ 
+  <select id="search" resultType="UserInfo" parameterType="String">
+  	select * from userinfo where userid = #{userid}
+  </select>
+  
+  <update id="update" parameterType="String">
+     update userinfo set userpwd = #{userpwd}, email = #{email}, address = #{address}, tel = #{tel} where userid = #{userid}
+  </update>
+
+
+  <delete id="delete" parameterType="String">
+    delete from userinfo where userid = #{userid}
+  </delete>
+  
+  <select id="login" resultType="UserInfo" parameterType="String">
+  	select * from userinfo where userid= #{userid} and userpwd= #{userpwd}	
+  </select>
+  
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

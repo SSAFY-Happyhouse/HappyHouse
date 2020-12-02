@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- xml mapper와 짝이 되서 돌아갈 자바명, 패키지명을 적어주면 된다. -->
+
+<mapper namespace="com.mybatis.mapper.HouseDealMapper">
+
+	<resultMap type="HouseDeal" id="HouseDealResult">
+		<id property="no" column="no" />
+		<result property="dong" column="dong" />
+		<result property="aptName" column="aptName" />
+		<result property="code" column="code" />
+		<result property="dealAmount" column="dealAmount" />
+		<result property="buildYear" column="buildYear" />
+		<result property="dealYear" column="dealYear" />
+		<result property="dealMonth" column="dealMonth" />
+		<result property="dealDay" column="dealDay" />
+		<result property="area" column="area" />
+		<result property="floor" column="floor" />
+		<result property="jibun" column="jibun" />
+		<result property="type" column="type" />
+		<result property="rentMoney" column="rentMoney" />
+	</resultMap>
+
+
+	 <select id="searchAll" resultType="HouseDeal" parameterType="String">
+      select * from Housedeal 
+      where type in
+      <foreach collection="searchType" item="item" index="index" separator="," open="(" close=")">
+      	<!-- if문에서 true index값 +1을 반환한다. -->
+      	<if test='item == true'>
+      		#{index}+1
+      	</if>
+      </foreach> 
+      
+      <if test="dong!=null">
+        and dong like concat('%',#{dong},'%')
+      </if>
+      <if test="aptname!=null">
+         and AptName like concat('%',#{aptname},'%')
+      </if>
+	
+      
+      
+      limit 1000
+   </select>
+   
+   <select id="search" resultType="HouseDeal" parameterType="Integer">
+      select * from Housedeal where no = #{no}
+   </select>
+
+</mapper>
