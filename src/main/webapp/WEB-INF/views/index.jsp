@@ -238,7 +238,7 @@ th {
 						let tmpLat;
 						let tmpLng;
 						$.get("https://maps.googleapis.com/maps/api/geocode/json"
-								,{	key:'AIzaSyD4rtBUlM1ixb0i2IHcnDLAIdPbAeMFIYI'
+								,{	key:''
 									, address:vo.dong+"+"+vo.AptName+"+"+vo.jibun
 								}
 								, function(data, status) {
@@ -267,7 +267,7 @@ th {
 			<br>
 			<div id="map" style="width: 80%; height: 400px; margin: auto;"></div>
 		<script src="https://unpkg.com/@google/markerclustererplus@4.0.1/dist/markerclustererplus.min.js"></script>
-		<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD4rtBUlM1ixb0i2IHcnDLAIdPbAeMFIYI&callback=initMap"></script>
+		<script async defer src="https://maps.googleapis.com/maps/api/js?key=&callback=initMap"></script>
 		<script>
 			var multi = {lat: 37.5665734, lng: 126.978179};
 			var map;
